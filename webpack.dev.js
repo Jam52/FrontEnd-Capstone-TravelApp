@@ -29,7 +29,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/client/views/index.html'
+            template: './src/client/views/index.html',
+            meta: {viewport: 'content="width=device-width, initial-scale=1'}
         }),
         new CleanWebpackPlugin({
             // Simulate the removal of files

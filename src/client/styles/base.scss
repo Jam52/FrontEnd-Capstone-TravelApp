@@ -11,10 +11,10 @@ $color-light-background: #f2f2f2;
 $font-title: 'Bitter', serif;
 $font-paragraph: 'Montserrat', sans-serif;
 
+//Header
 #header {
     background-color: $color-dark-grey;
     height: 140px;
-    width: 100vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -29,6 +29,7 @@ $font-paragraph: 'Montserrat', sans-serif;
         align-self: start;
         padding: 20px;
         width: 70vw;
+        font-size: 1.3em;
 
         #divider {
             background-color: $color-primary;
@@ -36,9 +37,6 @@ $font-paragraph: 'Montserrat', sans-serif;
             height: 20px;
             margin: 0px 5px 0px 5px;
         }
-
-
-
     }
 
     img {
@@ -52,11 +50,40 @@ $font-paragraph: 'Montserrat', sans-serif;
         font-family: $font-title;
         color: #fff;
         display: flex;
-        font-size: 3.5em;
+        font-size: 4em;
 
         .orange{
             color: $color-primary;
         }
+    }
+}
+
+//main content holder
+.main-content {
+    width: 80%;
+    margin: auto;
+}
+
+//Section-Dividers
+.section-divider {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+
+    .grey-line {
+        background-color: $color-light-grey;
+        height: 2px;
+        align-self: center;
+        flex-grow: 1;
+    }
+
+    h2 {
+        font-family: $font-paragraph;
+        font-size: 2em;
+        align-self: center;
+        padding: 0px 15px 0px 15px;
     }
 
 }
