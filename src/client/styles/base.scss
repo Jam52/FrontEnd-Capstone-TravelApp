@@ -1,0 +1,62 @@
+//Colours 
+$color-primary: #ff9f43;
+$color-secondary: #82ccdd;
+$color-dark-grey: #333;
+$color-light-grey: #c8d6e5;
+$color-light-background: #f2f2f2;
+
+//Fonts
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+$font-title: 'Bitter', serif;
+$font-paragraph: 'Montserrat', sans-serif;
+
+#header {
+    background-color: $color-dark-grey;
+    height: 140px;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    #login {
+        color: #fff;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-content: center;
+        font-family: $font-paragraph;
+        align-self: start;
+        padding: 20px;
+        width: 70vw;
+
+        #divider {
+            background-color: $color-primary;
+            width: 2px;
+            height: 20px;
+            margin: 0px 5px 0px 5px;
+        }
+
+
+
+    }
+
+    img {
+        height: 180px;
+        padding: 10px 0px 0px 10px;
+        align-self: flex-start;
+        
+    }
+
+    .title {
+        font-family: $font-title;
+        color: #fff;
+        display: flex;
+        font-size: 3.5em;
+
+        .orange{
+            color: $color-primary;
+        }
+    }
+
+}
