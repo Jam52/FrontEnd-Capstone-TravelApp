@@ -4,17 +4,31 @@
   "description": "Title: Travel App_Udacity Capstone Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server/index.js",
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack-dev-server --inline --progress --port 8001 --config webpack.dev.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.9.6",
+    "babel-loader": "^8.1.0",
     "body-parser": "^1.19.0",
+    "clean-webpack-plugin": "^3.0.0",
     "cors": "^2.8.5",
+    "css-loader": "^3.5.3",
     "express": "^4.17.1",
-    "path": "^0.12.7"
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "node-sass": "^4.14.1",
+    "path": "^0.12.7",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "webpack-cli": "^3.3.11"
   },
   "devDependencies": {
-    "webpack": "^4.43.0"
+    "webpack": "^4.43.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }

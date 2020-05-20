@@ -8,7 +8,7 @@ const bParser = require('body-parser');
 const cors = require('cors');
 app.use(cors());
 app.use(bParser.urlencoded({extended: false}));
-app.use(b.bParser.json());
+app.use(bParser.json());
 
 // get Index entry point
 app.get('/', function (req,res) {
