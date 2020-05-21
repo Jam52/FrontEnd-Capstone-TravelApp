@@ -1,2 +1,31 @@
 @import 'base';
 
+#new-trip-form {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr;
+
+    label {
+        font-family: $font-title;
+        font-size: 1.5em;
+        padding-bottom: 5px;
+    }
+
+    div input {
+        font-family: $font-paragraph;
+        font-size: 1.1em;
+        padding: 8px;
+        border: $border-form;
+
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #new-trip-submit {
+        align-self: end;
+    }
+
+}

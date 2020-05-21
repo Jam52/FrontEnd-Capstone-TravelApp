@@ -12,8 +12,29 @@ $color-light-background: #f2f2f2;
 $font-title: 'Bitter', serif;
 $font-paragraph: 'Montserrat', sans-serif;
 
+//Borders
+$border-form: 2px solid $color-primary;
+
 //Media query break-points
 $media-break-point-tablet: 850px;
+
+//button
+.button {
+    border: none;
+    background-color: $color-primary;
+    color: #fff;
+    font-family: $font-title;
+    font-size: 1.3em;
+
+    &:hover {
+       transform: scale(1.01);
+       box-shadow: 3px 3px 4px rgba(0,0,0, 0.3);
+    }
+
+    &:active {
+        transform: translateY(3px);
+    }
+}
 
 //main content holder
 .main-content {
@@ -44,3 +65,4 @@ $media-break-point-tablet: 850px;
     }
 
 }
+
