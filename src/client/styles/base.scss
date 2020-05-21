@@ -1,7 +1,8 @@
 //Colours 
-$color-primary: #ff9f43;
+$color-primary: #ff9c31;
 $color-secondary: #82ccdd;
-$color-dark-grey: #333;
+$color-dark-grey: #222;
+$color-dark-blue: #3b6f8c;
 $color-light-grey: #c8d6e5;
 $color-light-background: #f2f2f2;
 
@@ -11,52 +12,8 @@ $color-light-background: #f2f2f2;
 $font-title: 'Bitter', serif;
 $font-paragraph: 'Montserrat', sans-serif;
 
-//Header
-#header {
-    background-color: $color-dark-grey;
-    height: 140px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    #login {
-        color: #fff;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-content: center;
-        font-family: $font-paragraph;
-        align-self: start;
-        padding: 20px;
-        width: 70vw;
-        font-size: 1.3em;
-
-        #divider {
-            background-color: $color-primary;
-            width: 2px;
-            height: 20px;
-            margin: 0px 5px 0px 5px;
-        }
-    }
-
-    img {
-        height: 180px;
-        padding: 10px 0px 0px 10px;
-        align-self: flex-start;
-        
-    }
-
-    .title {
-        font-family: $font-title;
-        color: #fff;
-        display: flex;
-        font-size: 4em;
-
-        .orange{
-            color: $color-primary;
-        }
-    }
-}
+//Media query break-points
+$media-break-point-tablet: 850px;
 
 //main content holder
 .main-content {
