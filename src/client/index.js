@@ -5,6 +5,9 @@ logo.setAttribute('src', Logo);
 import Question from './images/travelApp_question.png';
 const photo = document.querySelector('.trip-photo');
 photo.setAttribute('src', Question);
+import Arrow from './images/travelApp_arrow.png';
+const arrow = document.querySelector('.packing-arrow');
+arrow.setAttribute('src', Arrow);
 
 //import style files
 import './styles/resets.scss';
