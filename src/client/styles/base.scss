@@ -36,6 +36,20 @@ $media-break-point-tablet: 850px;
     }
 }
 
+//standard elements
+p {
+    font-family: $font-paragraph;
+    font-size: 1em;
+}
+
+h1 h2 h3 {
+    font-family: $font-title;
+}
+
+.hidden {
+    display: none;
+}
+
 //main content holder
 .main-content {
     width: 80%;
