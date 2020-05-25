@@ -16,7 +16,7 @@
             font-family: $font-title;
             color: #fff;
             display: flex;
-            font-size: 4em;
+            font-size: 3.5em;
             align-self: center;
     
             .orange{
@@ -45,7 +45,9 @@
     }
 
     img {
-        height: 180px;
+        width: 35%;
+        min-width: 100px;
+        max-width: 260px;
         padding: 10px 0px 0px 10px;
         align-self: flex-start;
         
@@ -60,12 +62,20 @@
         flex-direction: column-reverse;
         
         .title {
-            font-size: 3.5em;
+            font-size: 3em;
             align-self: flex-end;
             padding: 0px 20px 20px 0px;
         }
         #login {
             align-self: flex-end;
         }
+    }
+}
+
+//Media querys for phone size
+@media (max-width: $media-break-point-phone) {
+    #header-container #header .title {
+            font-size: 2.5em;
+
     }
 }

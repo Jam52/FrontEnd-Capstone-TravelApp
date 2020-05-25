@@ -6,6 +6,7 @@
     grid-gap: 20px;
     grid-template-columns: 1fr 1fr;
 
+
     label {
         font-family: $font-title;
         font-size: 1.5em;
@@ -30,3 +31,12 @@
     }
 
 }
+
+//Media query for tablet size
+@media (max-width: $media-break-point-tablet) {
+    #new-trip-form {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+}
+

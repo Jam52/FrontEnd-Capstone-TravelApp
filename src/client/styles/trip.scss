@@ -29,10 +29,15 @@
         transform: translateY(-80px);
         margin-right: 5%;
 
+        .add-info {
+            text-align: center;
+        }
+
         .button {
             width: 70%;
-            margin: 5px;
+            margin: 5px 0px;
             padding: 5px;
+            
         }
 
         img {
@@ -108,12 +113,60 @@
     }
 }
 
+//Media query for tablet size
 @media (max-width: $media-break-point-tablet){
     .trip-main {
         flex-direction: column;
 
         .photo-and-buttons  {
             flex-direction: row;
+            transform: translateY(-50px);
+            justify-content: space-between;
+            margin-right: 0px;
+            z-index: 1;
+            
+
+            .button {
+                width:100%;
+                margin:2px 0px;
+                position: relative;
+
+            }
         }
+
+        .trip-infomation {
+            transform: translateY(-30px);
+        }
+    }
+
+    //making add buttons a dropdown
+    .drop-header {
+        border: $border-form;
+        background-color: white;
+        width:150px;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .drop-content {
+        display: none;
+        width: 150px;
+        position: absolute;
+        
+    }
+
+    .add-info:hover .drop-content {
+        display: block;
+        width: 150px;
+        z-index: 100;
+    }
+
+
+}
+
+//Media query for phone size
+@media (max-width: $media-break-point-phone) {
+    .trip-header {
+        font-size: 2em;
     }
 }
