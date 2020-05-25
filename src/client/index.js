@@ -1,3 +1,17 @@
+//add new trip test
+async function fetchHtmlAsText(url) {
+    const text = await fetch(url);
+    console.log(await text);
+    return await text.text();
+}
+async function addTrip() {
+    console.log('loading file');
+    const contentDiv = document.getElementById('first-trip');
+    contentDiv.innerHTML = await fetchHtmlAsText('/trip');
+}
+
+addTrip();
+
 //set images in webpack
 import Logo from './images/travelApp_logo.png';
 const logo = document.getElementById('logo');

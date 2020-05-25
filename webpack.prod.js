@@ -11,6 +11,10 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.html$/i,
+                loader: 'html-loader',
+            },
+            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: "babel-loader"
@@ -33,7 +37,13 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
+            filename: 'index.html',
             template: './src/client/views/index.html'
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'trip.html',
+            template: './src/client/views/trip.html',
+            chunks: []
         }),
         new CleanWebpackPlugin({
             // Simulate the removal of files
@@ -44,17 +54,6 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
-    ],
-    plugins: [
-        new CleanWebpackPlugin({ 
-            dry: true,
-            cleanStaleWebpackAssets: true,
-            protectWebpackAssets: true,
-            verbose: true
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/client/views/index.html'
-        })
     ],
     output: {
         filename: '[name].bundle.js',

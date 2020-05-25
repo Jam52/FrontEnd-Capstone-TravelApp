@@ -1,4 +1,5 @@
 // initialising express 
+const path = require('path');
 const express = require('express');
 const app = express();
 app.use(express.static('./dist'))
@@ -13,6 +14,11 @@ app.use(bParser.json());
 // get Index entry point
 app.get('/', function (req,res) {
     res.send(path.resolve('dist/index.html'));
+})
+
+app.get('/trip', function (req, res) {
+    console.log('++GETTING TRIP++');;
+    res.sendfile(path.resolve('dist/trip.html'));
 })
 
 // designate PORT
