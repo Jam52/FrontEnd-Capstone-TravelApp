@@ -4,7 +4,7 @@
   "description": "Title: Travel App_Udacity Capstone Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --detectOpenHandles",
     "start": "node src/server/index.js",
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --inline --progress --port 8001 --config webpack.dev.js --open"
@@ -12,8 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.9.6",
-    "babel-loader": "^8.1.0",
     "body-parser": "^1.19.0",
     "clean-webpack-plugin": "^3.0.0",
     "cors": "^2.8.5",
@@ -23,13 +21,21 @@
     "html-webpack-plugin": "^4.3.0",
     "node-sass": "^4.14.1",
     "path": "^0.12.7",
+    "regenerator-runtime": "^0.13.5",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
     "webpack-cli": "^3.3.11"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-loader": "^8.1.0",
+    "babel-polyfill": "^6.26.0",
     "html-loader": "^1.1.0",
+    "jest": "^26.0.1",
+    "lodash": "^4.17.15",
     "webpack": "^4.43.0",
     "webpack-dev-server": "^3.11.0"
   }

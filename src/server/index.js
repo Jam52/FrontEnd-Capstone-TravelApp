@@ -18,7 +18,7 @@ app.get('/', function (req,res) {
 
 app.get('/trip', function (req, res) {
     console.log('++GETTING TRIP++');;
-    res.sendfile(path.resolve('dist/trip.html'));
+    res.sendFile(path.resolve('dist/trip.html'));
 })
 
 // designate PORT

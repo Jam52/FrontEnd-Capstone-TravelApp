@@ -1,27 +1,12 @@
-//add new trip test
-async function fetchHtmlAsText(url) {
-    const text = await fetch(url);
-    console.log(await text);
-    return await text.text();
-}
-async function addTrip() {
-    console.log('loading file');
-    const contentDiv = document.getElementById('first-trip');
-    contentDiv.innerHTML = await fetchHtmlAsText('/trip');
-}
+//import js files
+import newTrip from './js/addTrip.js';
 
-addTrip();
+newTrip('1');
 
 //set images in webpack
 import Logo from './images/travelApp_logo.png';
 const logo = document.getElementById('logo');
 logo.setAttribute('src', Logo);
-import Question from './images/travelApp_question.png';
-const photo = document.querySelector('.trip-photo');
-photo.setAttribute('src', Question);
-import Arrow from './images/travelApp_arrow.png';
-const arrow = document.querySelector('.packing-arrow');
-arrow.setAttribute('src', Arrow);
 
 //import style files
 import './styles/resets.scss';
