@@ -1,7 +1,7 @@
-//import js files
-import newTrip from './js/addTrip.js';
+const regeneratorRuntime = require("regenerator-runtime");
 
-newTrip('1');
+//import js files
+import { createNewTrip } from './js/addTrip.js';
 
 //set images in webpack
 import Logo from './images/travelApp_logo.png';
@@ -19,3 +19,17 @@ import './styles/trip.scss';
 const finalSize = document.getElementById('destination-input').offsetHeight;
 console.log(finalSize);
 document.getElementById('new-trip-submit').style.height = finalSize + 'px';
+
+
+//event listener for new-trip-form
+const newTripSubmit = document.getElementById('new-trip-submit');
+newTripSubmit.addEventListener('click', (event) => {
+    event.preventDefault();
+    createNewTrip();
+
+    
+})
+
+
+//add new trip to dom
+newTrip('1');
