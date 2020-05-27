@@ -1,5 +1,5 @@
 const regeneratorRuntime = require("regenerator-runtime");
-const { fetchHtmlAsText } = require('../src/client/js/addTrip.js');
+const { fetchHtmlAsText } = require('../src/client/js/fetchHtmlAsText');
 
 test('testing fetch html file as text', () => {
     fetchHtmlAsText('/trip').then(

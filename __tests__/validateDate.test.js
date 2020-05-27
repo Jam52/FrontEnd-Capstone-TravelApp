@@ -11,4 +11,6 @@ test('checking imposible dates', () => {
     expect(dateChecker('13/22/2020')).toBeFalsy();
     expect(dateChecker('13/12/1820')).toBeFalsy();
     expect(dateChecker('34/12/2020')).toBeFalsy();
+    expect(dateChecker('31/04/2020')).toBeFalsy();
+    expect(dateChecker('29/02/2020')).toBeFalsy();
 })

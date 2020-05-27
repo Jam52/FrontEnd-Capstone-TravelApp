@@ -1,12 +1,6 @@
 //imports
 const { dateChecker } = require('./validateDate.js');
-
-//fetch trip template
-async function fetchHtmlAsText(url) {
-    const htmlFile = await fetch(url);
-    const text = await htmlFile.text();
-    return await text;
-}
+const { fetchHtmlAsText } = require('./fetchHtmlAsText.js');
 
 
 // create new trip fragment
