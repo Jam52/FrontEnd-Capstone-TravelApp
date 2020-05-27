@@ -17,20 +17,19 @@ async function createNewTrip() {
 
 //get initial trip dates and destination
 function getTripDatesAndDestination () {
+    const result = {};
     const departureDate = document.getElementById('departure-input').value;
-    console.log(departureDate);
     const returnDate = document.getElementById('return-input').value;
-    console.log(returnDate);
-    if(!dateChecker(departureDate) | !dateChecker(returnDate)) {
-        alert('invalid dates');
+    const destination = document.getElementById('destination-input').value;
+    if(!dateChecker(departureDate) | !dateChecker(returnDate) | (destination.length <= 0)) {
+        alert('invalid input');
     } else {
-        return {
-            "departureDate": departureDate,
-            "returnDate": returnDate
-        }
+        result.departureDate = departureDate;
+        result.returnDate = returnDate;
+        result.destination = destination;
+        console.log(result);
+        return result;
     }
-    
-
 }
 
 

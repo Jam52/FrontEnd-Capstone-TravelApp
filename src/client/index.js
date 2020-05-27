@@ -29,7 +29,3 @@ newTripSubmit.addEventListener('click', (event) => {
 
     
 })
-
-
-//add new trip to dom
-newTrip('1');
