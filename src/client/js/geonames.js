@@ -4,7 +4,6 @@ async function geonamesSearch(location) {
     try {
         const response = await fetch(buildUrl); 
         const responseJson = await response.json();
-        console.log(responseJson.geonames[0]);
         data.lng = await responseJson.geonames[0].lng;
         data.lat = await responseJson.geonames[0].lat;
         return data;
