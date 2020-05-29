@@ -1,3 +1,6 @@
+//data endpoint
+const data = {};
+
 // initialising express 
 const path = require('path');
 const express = require('express');
@@ -30,7 +33,7 @@ app.get('/trip', function (req, res) {
 })
 
 app.get('/geo', function (req, res) {
-    
+
 })
 
 // designate PORT
