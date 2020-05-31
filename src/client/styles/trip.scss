@@ -40,17 +40,27 @@
             
         }
 
-        img {
+        .img-container {
             width: 25vw;
+            max-width: 200px;
+            height: 25vw;
+            max-height: 200px;
             border-radius: 50%;
             border: $border-form;
             margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        img {
+            margin: 0 auto;
+            height: 100%;
+            width: auto;
         }
 
     }
 
 
-    .trip-infomation {
+    .trip-information {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
@@ -168,5 +178,8 @@
 @media (max-width: $media-break-point-phone) {
     .trip-header {
         font-size: 2em;
+    }
+    .photo-and-buttons  {
+        transform: translateY(-0px);
     }
 }

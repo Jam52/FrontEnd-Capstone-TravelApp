@@ -1,9 +1,11 @@
 //imports
 const { dateChecker } = require('./validateDate.js');
-const { fetchHtmlAsText } = require('./fetchHtmlAsText.js');
 const { fetchGeonames } = require('./geonames.js');
 const { getWeatherBit } = require('./weatherbit.js');
 const { fetchPixabay } = require('./fetchPixabay');
+const { addNewTripToUi } = require('./updateUi');
+const { getData } = require('./serverRequests');
+const { postData } = require('./serverRequests');
 import { async } from 'regenerator-runtime';
 
 // create new trip fragment
@@ -20,11 +22,10 @@ async function createNewTrip() {
     //add img url to userInput data
     const imgUrl = await fetchPixabay(await data.destination);
     data.imgUrl = await imgUrl;
-
     //postData to the server
-    postData('/newTrip', await data);
-
-
+    postData('/newTrip', await data).then(
+        addNewTripToUi(await data.destination + await data.departureDate)
+    );
 }
 
 //get initial trip dates and destination
@@ -74,38 +75,6 @@ async function geonamesSearch(location){
 
 }
 
-
-//POST request 
-const postData = async (url='', data={}) => {
-    const response = await fetch(url, {
-        method: 'POST', 
-        credentials: 'same-origin', 
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),      
-      });
-
-      try {
-        const newData = await response.json();
-        return newData;
-      }catch(error) {
-      console.log("error", error);
-      }
-}
-
-//GET data request
-const getData = async (url='') => {
-    const request = await fetch(url);
-    try {
-        const allData = await request.json()
-        console.log('getData');
-        console.log(allData);
-        return allData;
-    } catch(e) {
-        console.log("getData error: ", e);
-    };
-}
 
 export {
     createNewTrip,

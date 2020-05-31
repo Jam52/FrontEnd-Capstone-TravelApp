@@ -42,7 +42,7 @@ app.post('/newtrip', async (req, res) => {
         const newTripData = req.body;
         const newTripName = newTripData.destination + newTripData.departureDate;
         const newTrip = {
-            "departurDate": newTripData.departureDate,
+            "departureDate": newTripData.departureDate,
             "returnDate": newTripData.returnDate,
             "destination": newTripData.destination,
             "maxTemp": newTripData.maxTemp,
