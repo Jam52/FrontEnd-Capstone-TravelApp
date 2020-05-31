@@ -42,9 +42,9 @@
 
         .img-container {
             width: 25vw;
-            max-width: 200px;
+            max-width: 250px;
             height: 25vw;
-            max-height: 200px;
+            max-height: 250px;
             border-radius: 50%;
             border: $border-form;
             margin-bottom: 20px;
@@ -179,7 +179,10 @@
     .trip-header {
         font-size: 2em;
     }
-    .photo-and-buttons  {
-        transform: translateY(-0px);
+    .trip-main {
+        .photo-and-buttons  {
+            transform: translateY(-1px);
+        }
     }
+    
 }

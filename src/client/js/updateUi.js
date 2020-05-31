@@ -24,7 +24,10 @@ async function addNewTripToUi(tripName) {
     newTripFragment.querySelector('.dates').textContent = await tripData.departureDate + " - " + await tripData.returnDate;
     newTripFragment.querySelector('.packing-arrow').setAttribute('src', arrow );
     newTripFragment.querySelector('.trip-footer span').textContent = calulateTripDaysAway(await tripData.departureDate);
-
+    newTripFragment.querySelector('.tempMax').textContent = 'High temperature of about ' + await tripData.maxTemp + 'c'; 
+    newTripFragment.querySelector('.tempMin').textContent = 'Low temperature around ' + await tripData.minTemp + 'c'; 
+    newTripFragment.querySelector('.wind').textContent = 'Windspeed is normally around ' + await tripData.windSpd + 'm/s';
+    newTripFragment.querySelector('.rain').textContent = 'Precipitation of approximately ' + await tripData.precip + 'mm';
     
     //append to DOM
     const trips = document.getElementById('trips');
