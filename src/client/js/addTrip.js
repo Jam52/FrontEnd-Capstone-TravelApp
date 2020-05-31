@@ -1,49 +1,43 @@
 //imports
 const { dateChecker } = require('./validateDate.js');
 const { fetchHtmlAsText } = require('./fetchHtmlAsText.js');
-const { geonamesSearch } = require('./geonames.js');
+const { fetchGeonames } = require('./geonames.js');
 const { getWeatherBit } = require('./weatherbit.js');
-import 'babel-polyfill';
+const { fetchPixabay } = require('./fetchPixabay');
 import { async } from 'regenerator-runtime';
 
 // create new trip fragment
 async function createNewTrip() {
-    const userInput = await getTripDatesAndDestination();
-    const weather = await getWeatherBit(
-        await userInput.lng, 
-        await userInput.lat, 
-        await userInput.departureDate, 
-        await userInput.returnDate,
-        '327a6c289fd04805a16fea72bbed7a9a');
-    userInput.maxTemp = await weather.max_temp;
-    userInput.minTemp = await weather.min_temp;
-    userInput.precip = await weather.precip;
-    userInput.windSpd = await weather.wind_spd;
-    console.log('IN crateTrip: '+ await userInput);
+    //get data from DOM
+    const data = await getTripDatesAndDestination();
+    //add lng and lat using initial userInput data
+    const weather = await getWeatherBit(await data, '327a6c289fd04805a16fea72bbed7a9a');
+    data.maxTemp = await weather.max_temp;
+    data.minTemp = await weather.min_temp;
+    data.precip = await weather.precip;
+    data.windSpd = await weather.wind_spd;
+    console.log(await data.destination);
+    //add img url to userInput data
+    const imgUrl = await fetchPixabay(await data.destination);
+    data.imgUrl = await imgUrl;
 
-    postData('/newTrip', await userInput);
+    //postData to the server
+    postData('/newTrip', await data);
 
-    
-    
 
-    // console.log('loading file');
-    // const newTrip = document.createDocumentFragment();
-    // const newDiv = document.createElement('div');
-    // const contentDiv = document.getElementById('trips');
-    // newDiv.setAttribute('id', tripName)
-    // newDiv.innerHTML = await fetchHtmlAsText('/trip')
-    // .then(contentDiv.appendChild(newDiv));
 }
 
 //get initial trip dates and destination
 async function getTripDatesAndDestination () {
     const result = {};
+    //get data from DOM
     const departureDate = document.getElementById('departure-input').value;
     const returnDate = document.getElementById('return-input').value;
     const destination = document.getElementById('destination-input').value;
+    //get lng and lat using destination from userInput
     const longAndLat = await geonamesSearch(destination);
+    //get existing trip data to check if trip already exists
     const existingTripCheck = await getData('/tripData');
-    console.log(await existingTripCheck);
     if(!dateChecker(departureDate)) {
         alert('Invalid Departur Date');
     } else if(!dateChecker(returnDate)) {
@@ -61,6 +55,23 @@ async function getTripDatesAndDestination () {
         console.log(result);
         return result;
     }
+}
+
+//geonames fetch function returning only required infomation
+async function geonamesSearch(location){
+    const data = {};
+    try {
+        const geonames = await fetchGeonames(location);
+        data.lng = await geonames.geonames[0].lng;
+        data.lat = await geonames.geonames[0].lat;
+        console.log(data);
+        return data;
+    } catch(error) {
+        console.log(error)
+        console.log(data);
+        return null;
+    }
+
 }
 
 
@@ -98,5 +109,6 @@ const getData = async (url='') => {
 
 export {
     createNewTrip,
-    getTripDatesAndDestination
+    getTripDatesAndDestination,
+    geonamesSearch
 }

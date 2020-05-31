@@ -1,15 +1,15 @@
-const regeneratorRuntime = require("regenerator-runtime");
-const { fetchHtmlAsText } = require('../src/client/js/fetchHtmlAsText');
-const { getTripDatesAndDestination } = require('../src/client/js/addTrip');
-const puppeteer = require('puppeteer');
+const { geonamesSearch } = require('../src/client/js/addTrip');
+jest.mock('../src/client/js/geonames.js');
 
-test('testing fetch html file as text', () => {
-    fetchHtmlAsText('/trip').then(
-        text => {
-            expect(typeof text).toBe('string');
+test('Test for returning lng and lat only', () => {
+    return geonamesSearch('location').then(
+        data => {
+            expect(data.lng == '-79').toBeTruthy();
         }
     )
-});
+})
+
+
 
 
 

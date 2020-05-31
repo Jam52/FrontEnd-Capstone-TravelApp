@@ -1,4 +1,3 @@
-const regeneratorRuntime = require("regenerator-runtime");
 const { dateChecker } = require('../src/client/js/validateDate.js');
 
 test('checking date format', () => {

@@ -48,8 +48,8 @@ app.post('/newtrip', async (req, res) => {
             "maxTemp": newTripData.maxTemp,
             "minTemp": newTripData.minTemp,
             "windSpd": newTripData.windSpd,
-            "precip": newTripData.precip
-    
+            "precip": newTripData.precip,
+            "imgUrl": newTripData.imgUrl
         };
         if(!(newTripName in data)) {
             data[newTripName] = newTrip;
