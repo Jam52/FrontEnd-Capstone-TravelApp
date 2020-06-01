@@ -15,6 +15,7 @@ async function addNewTripToUi(tripName) {
     const newDiv = document.createElement('div');
     const divId = (await tripData.destination)+(await tripData.departureDate);
     newDiv.setAttribute('id', await divId);
+    newDiv.setAttribute('class', 'trip');
     newDiv.innerHTML = await htmlLayout;
     newTripFragment.appendChild(await newDiv);
 
@@ -24,10 +25,10 @@ async function addNewTripToUi(tripName) {
     newTripFragment.querySelector('.dates').textContent = await tripData.departureDate + " - " + await tripData.returnDate;
     newTripFragment.querySelector('.packing-arrow').setAttribute('src', arrow );
     newTripFragment.querySelector('.trip-footer span').textContent = calulateTripDaysAway(await tripData.departureDate);
-    newTripFragment.querySelector('.tempMax').textContent = 'High temperature of about ' + await tripData.maxTemp + 'c'; 
-    newTripFragment.querySelector('.tempMin').textContent = 'Low temperature around ' + await tripData.minTemp + 'c'; 
-    newTripFragment.querySelector('.wind').textContent = 'Windspeed is normally around ' + await tripData.windSpd + 'm/s';
-    newTripFragment.querySelector('.rain').textContent = 'Precipitation of approximately ' + await tripData.precip + 'mm';
+    newTripFragment.querySelector('.tempMax').textContent = 'High temperature: ' + await tripData.maxTemp + 'c'; 
+    newTripFragment.querySelector('.tempMin').textContent = 'Low temperature: ' + await tripData.minTemp + 'c'; 
+    newTripFragment.querySelector('.wind').textContent = 'Windspeed: ' + await tripData.windSpd + 'm/s';
+    newTripFragment.querySelector('.rain').textContent = 'Precipitation: ' + await tripData.precip + 'mm';
     
     //append to DOM
     const trips = document.getElementById('trips');
