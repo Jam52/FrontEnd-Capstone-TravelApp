@@ -22,8 +22,6 @@ const getData = async (url='') => {
     const request = await fetch(url);
     try {
         const allData = await request.json()
-        console.log('getData');
-        console.log(allData);
         return allData;
     } catch(e) {
         console.log("getData error: ", e);

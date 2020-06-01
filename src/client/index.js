@@ -1,9 +1,9 @@
 const regeneratorRuntime = require("regenerator-runtime");
 
 //import js files
-import { createNewTrip } from './js/addTrip.js';
-import { addNewTripToUi } from './js/updateUi';
-import { getData } from './js/serverRequests';
+const { createNewTrip } = require('./js/addTrip.js');
+const { addNewTripToUi } = require('./js/updateUi');
+const { getData } = require('./js/serverRequests');
 
 //set images in webpack
 import Logo from './images/travelApp_logo.png';
@@ -19,7 +19,6 @@ import './styles/trip.scss';
 
 // adjust button size to match form input
 const finalSize = document.getElementById('destination-input').offsetHeight;
-console.log(finalSize);
 document.getElementById('new-trip-submit').style.height = finalSize + 'px';
 
 

@@ -89,6 +89,25 @@
             height: 1px;
         }
 
+        .packing-list{
+            .packing-item {
+
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 5px 0px;
+
+                img{ 
+                    height: 10px;
+                    width: 10px;
+                    margin: 0px 30px 0px 10px;
+                }
+
+            }
+            
+        }
+
         .trip-footer {
             font-size: 2em;
             color: $color-primary;

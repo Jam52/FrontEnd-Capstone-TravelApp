@@ -13,7 +13,6 @@ async function getWeatherBit(userInput, key) {
     const endDate = returnDate[3]+returnDate[4]+'-'+returnDate[0]+returnDate[1];
     try {
         const response = await fetchWeatherData(lat, lng, startDate, endDate, key);
-        console.log(await response.data[0]);
         return await response.data[0];
     } catch(error) { 
         console.log(error);

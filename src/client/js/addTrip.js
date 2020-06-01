@@ -18,7 +18,6 @@ async function createNewTrip() {
     data.minTemp = await weather.min_temp;
     data.precip = await weather.precip;
     data.windSpd = await weather.wind_spd;
-    console.log(await data.destination);
     //add img url to userInput data
     const imgUrl = await fetchPixabay(await data.destination);
     data.imgUrl = await imgUrl;
@@ -53,7 +52,6 @@ async function getTripDatesAndDestination () {
         result.destination = destination;
         result.lng = longAndLat.lng;
         result.lat = longAndLat.lat;
-        console.log(result);
         return result;
     }
 }
@@ -65,7 +63,6 @@ async function geonamesSearch(location){
         const geonames = await fetchGeonames(location);
         data.lng = await geonames.geonames[0].lng;
         data.lat = await geonames.geonames[0].lat;
-        console.log(data);
         return data;
     } catch(error) {
         console.log(error)
