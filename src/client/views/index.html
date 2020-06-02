@@ -49,28 +49,31 @@
             <div id="trips"></div>
 
             <!--Pop Up Forms-->
-            <div class="flights-popup-form hidden-form popup-form" id="">
-                <form>
-                    <div id="departure-airport">
-                        <label class="form-label">Departure Airport</label>
-                        <input type="text" class="flights-form-input" placeholder="enter airport">
-                    </div>
-                    <div id="depatrue-time">
-                        <label class="form-label">Departure Time</label>
-                        <input type="text" class="flights-form-input" placeholder="enter time">
-                    </div>
-                    <div id="return-airport">
-                        <label class="form-label">Return Airport</label>
-                        <input type="text" class="flights-form-input" placeholder="enter airport">
-                    </div>
-                    <div id="retur-time">
-                        <label class="form-label">Return Time</label>
-                        <input type="text" class="flights-form-input" placeholder="enter time">
-                    </div>
-                    <button id="flights-form-cancel" type="button" class="button">Cancel</button>
-                    <button id="flights-form-submit" type="button" class="button">Submit</button>
-                </form>
+            <div id="popup-forms">
+                <div class="flights-popup-form hidden-form popup-form" id="">
+                    <form>
+                        <div id="departure-airport">
+                            <label class="form-label">Departure Airport</label>
+                            <input type="text" name="Departure-Airport" class="flights-form-input" placeholder="enter airport">
+                        </div>
+                        <div id="depatrue-time">
+                            <label class="form-label">Departure Time</label>
+                            <input type="text" name="Departure-Time" class="flights-form-input" placeholder="enter time">
+                        </div>
+                        <div id="return-airport">
+                            <label class="form-label">Return Airport</label>
+                            <input type="text" name="Return-Airport" class="flights-form-input" placeholder="enter airport">
+                        </div>
+                        <div id="retur-time">
+                            <label class="form-label">Return Time</label>
+                            <input type="text" name="Return-Time" class="flights-form-input" placeholder="enter time">
+                        </div>
+                        <button class="form-cancel button" name="flights" type="button">Cancel</button>
+                        <button class="form-submit button" name="flights" type="button">Submit</button>
+                    </form>
+                </div>
             </div>
+            
         
     </body>
 </html>
