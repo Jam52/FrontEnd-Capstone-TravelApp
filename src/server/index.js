@@ -49,13 +49,35 @@ app.post('/newtrip', async (req, res) => {
             "minTemp": newTripData.minTemp,
             "windSpd": newTripData.windSpd,
             "precip": newTripData.precip,
-            "imgUrl": newTripData.imgUrl
+            "imgUrl": newTripData.imgUrl,
+            "packingList": []
         };
         if(!(newTripName in data)) {
             data[newTripName] = newTrip;
-            console.log(data)
         }
     } catch(error) {
         console.log(error);
     }
+})
+
+app.post('/newPackingItem', (req, res) => {
+    const request = req.body;
+    const item = request.item;
+    const trip = request.trip;
+    data[trip].packingList.push(item);
+    console.log(data[trip]);
+})
+
+app.delete('/removePackingItem/:tripName/:item', (req, res) => {
+    const itemToRemove = req.params.item;
+    console.log(itemToRemove);
+    const trip = req.params.tripName;
+    const array = data[trip].packingList;
+    array.forEach(function(element, index) {
+        if(element == itemToRemove){
+            data[trip].packingList.splice(index, 1);
+        }
+    });
+    
+    console.log(data[trip]);
 })

@@ -28,7 +28,16 @@ const getData = async (url='') => {
     };
 }
 
+//DELETE request
+async function deleteData(url, tripName, item) {
+    const response = await fetch(url + '/' + tripName + '/' + item, {
+        method: 'delete'
+    });
+    return await response.json();
+  }
+
 export {
     getData,
-    postData
+    postData,
+    deleteData
 }

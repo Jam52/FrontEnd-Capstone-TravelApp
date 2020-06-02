@@ -2,7 +2,7 @@ const { getData } = require('./serverRequests');
 const { fetchHtmlAsText } = require('./fetchHtmlAsText.js');
 import { async } from 'regenerator-runtime';
 import arrow  from '../images/travelApp_arrow.png';
-const { addPackingListenter } = require('./packingList')
+const { addPackingItem } = require('./packingList')
 
 //addtrip to the DOM
 async function addNewTripToUi(tripName) {
@@ -31,10 +31,18 @@ async function addNewTripToUi(tripName) {
     newTripFragment.querySelector('.wind').textContent = 'Windspeed: ' + await tripData.windSpd + 'm/s';
     newTripFragment.querySelector('.rain').textContent = 'Precipitation: ' + await tripData.precip + 'mm';
     
+    //adding packinglist items
+    if(tripData.packingList.length > 0) {
+        const packingListDiv = newTripFragment.querySelector('.packing-list');
+        const packingList = tripData.packingList;
+        packingList.forEach(element => {
+            addPackingItem(element, packingListDiv);
+        })
+    }
+
     //append to DOM
     const trips = document.getElementById('trips');
     trips.appendChild(await newTripFragment);
-    addPackingListenter();
 
 }
 

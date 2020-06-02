@@ -1,24 +1,7 @@
 import Cross from '../images/travelApp_cross.png';
-
-//event listener add new entries to packing list
-function addPackingListenter() {
-    const newPackingButtons = document.querySelectorAll('.packing-submit');
-    for(const button of newPackingButtons){
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            const target = event.target;
-            const packingItem = target.previousElementSibling.value;
-            const packingListDiv = target.parentNode.nextElementSibling;
-            console.log(packingItem);
-            addPackingItem(packingItem, packingListDiv);
-        } )
-    }
-}
-
-
+const postData = require('./serverRequests');
 
 function addPackingItem(packingItem, packingListDiv) {
-    console.log('__packing__')
     //create new fragment and add item
     if(packingItem.length > 0) {
         //create fragment
@@ -32,8 +15,8 @@ function addPackingItem(packingItem, packingListDiv) {
         //crate anchor and image and set src
         const anchor = document.createElement('a');
         anchor.setAttribute('href', '#')
-        anchor.setAttribute('class', 'remove-item');
         const crossImg = document.createElement('img');
+        crossImg.setAttribute('class', 'remove-item');
         crossImg.setAttribute('src', Cross);
         anchor.appendChild(crossImg);
         //append to div then fragment
@@ -46,8 +29,16 @@ function addPackingItem(packingItem, packingListDiv) {
     }
 }
 
+function findTripName(target) {
+    for( ; target && target !== document; target = target.parentNode) {
+        if(target.matches('.trip')){
+            return target.id;
+        }
+    }
+}
+
 
 export {
     addPackingItem,
-    addPackingListenter
+    findTripName
 }

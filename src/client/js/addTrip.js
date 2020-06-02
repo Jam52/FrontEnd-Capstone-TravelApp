@@ -47,8 +47,8 @@ async function getTripDatesAndDestination () {
     } else if((destination+departureDate) in existingTripCheck){
         alert('Trip Already Exists!')
     } else {
-        result.departureDate = departureDate;
-        result.returnDate = returnDate;
+        result.departureDate = departureDate.replace(/\//g, "-");
+        result.returnDate = returnDate.replace(/\//g, "-");
         result.destination = destination;
         result.lng = longAndLat.lng;
         result.lat = longAndLat.lat;
