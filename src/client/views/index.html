@@ -37,7 +37,7 @@
                     <label class="form-label">Destination</label>
                     <input id="destination-input" type="text" placeholder="enter your destination">
                 </div>
-                <button id="new-trip-submit" type="button" class="button">Submit</button>
+                <button id="new-trip-submit" type="button" class="button">Add Trip</button>
 
             </form>
             <div class="section-divider">
@@ -47,6 +47,30 @@
             </div>
 
             <div id="trips"></div>
+
+            <!--Pop Up Forms-->
+            <div class="flights-popup-form popup-form" id="">
+                <form>
+                    <div id="departure-airport">
+                        <label class="form-label">Departure Airport</label>
+                        <input type="text" class="flights-form-input" placeholder="enter airport">
+                    </div>
+                    <div id="depatrue-time">
+                        <label class="form-label">Departure Time</label>
+                        <input type="text" class="flights-form-input" placeholder="enter time">
+                    </div>
+                    <div id="return-airport">
+                        <label class="form-label">Return Airport</label>
+                        <input type="text" class="flights-form-input" placeholder="enter airport">
+                    </div>
+                    <div id="retur-time">
+                        <label class="form-label">Return Time</label>
+                        <input type="text" class="flights-form-input" placeholder="enter time">
+                    </div>
+                    <button id="flights-form-cancel" type="button" class="button">Cancel</button>
+                    <button id="flights-form-submit" type="button" class="button">Submit</button>
+                </form>
+            </div>
         
     </body>
 </html>

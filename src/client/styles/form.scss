@@ -1,25 +1,28 @@
 @import 'base';
 
+
+//common elements form
+.form-label {
+        font-family: $font-title;
+        font-size: 1.5em;
+        padding-bottom: 5px;
+}
+
+form div input {
+    font-family: $font-paragraph;
+    font-size: 1.1em;
+    padding: 8px;
+    border: $border-form;
+}
+
+
+//new trip form elements
 #new-trip-form {
     padding: 0px 5% 0px 5%;
     display: grid;
     grid-gap: 20px;
     grid-template-columns: 1fr 1fr;
 
-
-    label {
-        font-family: $font-title;
-        font-size: 1.5em;
-        padding-bottom: 5px;
-    }
-
-    div input {
-        font-family: $font-paragraph;
-        font-size: 1.1em;
-        padding: 8px;
-        border: $border-form;
-
-    }
 
     div {
         display: flex;
@@ -32,11 +35,57 @@
 
 }
 
+//pop up form elements
+.popup-form {
+    position: fixed;
+    margin: auto;
+    background-color: rgba(0,0,0,0.2);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    
+    
+    form{
+        position: fixed;
+        margin: auto;
+        background-color: #fff;
+        padding: 3% 5%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+    }
+
+    button {
+        height: 42px;
+    }
+
+}
+
+
+.flights-popup-form{
+    visibility: hidden;
+}
+
+
+
 //Media query for tablet size
 @media (max-width: $media-break-point-tablet) {
     #new-trip-form {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
+    }
+}
+
+
+//Media query for phone size
+@media (max-width: $media-break-point-phone) {
+    .popup-form form {
+        grid-template-columns: 1fr;
     }
 }
 
