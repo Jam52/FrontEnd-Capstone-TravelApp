@@ -71,6 +71,19 @@ document.getElementById('trips').addEventListener('click', function(e) {
     }
 })
 
+//event listener for new trip info buttons
+document.getElementById('trips').addEventListener('click', (e) => {
+    if(e.target && e.target.matches('.new-trip-info')) {
+        e.preventDefault();
+        const target = e.target;
+        const popUpForm = document.querySelector('.'+ target.name + "-popup-form");
+        console.log(popUpForm);
+        popUpForm.classList.remove('hidden-form');
+        popUpForm.setAttribute('id', target.name);
+    }
+})
+
+
 //Update ui for any exsiting trips
 async function refreshPage() {
     const tripData = await getData('/tripData');
