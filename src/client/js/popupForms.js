@@ -62,15 +62,28 @@ function findTripNameForm(target) {
 //getData and update UI
 async function updateUiWithNewTripData (tripName, inputName) {
     console.log('__adding new data to UI__');
+    //get data from server
     const dataFromServer = await getData('/tripData');
     const newData = await dataFromServer[tripName][inputName]
-    console.log(newData);
+    //get trip and targetDiv from the dom
     const trip = document.getElementById(tripName);
-    console.log(trip.id);
-    console.log('.' + inputName);
     const targetDiv = trip.querySelector('.' + inputName);
-    console.log(targetDiv.classList);
+    //remove class 'hidden' to display in the dom
     targetDiv.classList.remove('hidden');
+    //querry paragraph to update
     const p = targetDiv.querySelector('p');
-    p.textContent  = await newData;
+
+    //Turn data into required HTMLtext format
+    let formatedData = '';
+    for(const [key, value] of Object.entries( await newData)){
+        if(key != 'notes') {
+            const keyWithSpaces = key.replace('-', ' ');
+            formatedData += `${keyWithSpaces}: ${value} <br>`;
+        } else {
+            formatedData += `${value} <br>`;
+        }
+        
+        
+    }
+    p.innerHTML  = await formatedData;
 }
