@@ -31,7 +31,7 @@ async function addNewTripToUi(tripName) {
     newTripFragment.querySelector('.wind').textContent = 'Windspeed: ' + await tripData.windSpd + 'm/s';
     newTripFragment.querySelector('.rain').textContent = 'Precipitation: ' + await tripData.precip + 'mm';
     
-    //adding packinglist items
+    //update packinglist items
     if(tripData.packingList.length > 0) {
         const packingListDiv = newTripFragment.querySelector('.packing-list');
         const packingList = tripData.packingList;

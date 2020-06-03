@@ -48,7 +48,7 @@ form div input {
     height: 100vh;
     
     
-    form{
+    form {
         position: fixed;
         margin: auto;
         background-color: #fff;
@@ -59,13 +59,21 @@ form div input {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 10px;
+
     }
 
     button {
         height: 42px;
     }
-
 }
+
+#notes {
+    grid-column: 1/-1;
+    }
+
+
+
+
 
 
 .hidden-form {

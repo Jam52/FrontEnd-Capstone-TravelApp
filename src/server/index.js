@@ -26,6 +26,7 @@ app.get('/trip', function (req, res) {
 })
 
 app.get('/tripData', function (req, res) {
+    console.log('__getting trip data__');
     res.send(data);
 })
 
@@ -80,4 +81,23 @@ app.delete('/removePackingItem/:tripName/:item', (req, res) => {
     });
     
     console.log(data[trip]);
+})
+
+app.post('/addAdditionalData', (req, res) => {
+    try{
+        const request = req.body;
+        const name = request.name;
+        console.log(name);
+        const newData = request.data;
+        console.log(newData);
+        const trip = request.tripName;
+        console.log(trip);
+        data[trip][name] = newData;
+        console.log(data[trip]);
+    } catch(error) {
+        console.log('__posting additional data__');
+        console.log(error);
+        res.status(500);
+    }
+
 })
