@@ -3,6 +3,7 @@ const { fetchHtmlAsText } = require('./fetchHtmlAsText.js');
 import { async } from 'regenerator-runtime';
 import arrow  from '../images/travelApp_arrow.png';
 const { addPackingItem } = require('./packingList')
+const { updateUiWithNewTripData } = require('./popupForms');
 
 //addtrip to the DOM
 async function addNewTripToUi(tripName) {
@@ -39,6 +40,24 @@ async function addNewTripToUi(tripName) {
             addPackingItem(element, packingListDiv);
         })
     }
+
+    //update flights data
+    if('flights' in tripData){
+        const targetDiv = newTripFragment.querySelector('.flights');
+        updateUiWithNewTripData(tripName, 'flights', targetDiv);
+    }
+
+    if('lodging' in tripData){
+        const targetDiv = newTripFragment.querySelector('.lodging');
+        updateUiWithNewTripData(tripName, 'lodging', targetDiv);
+    }
+
+    if('notes' in tripData){
+        const targetDiv = newTripFragment.querySelector('.notes');
+        updateUiWithNewTripData(tripName, 'notes', targetDiv);
+    }
+
+    
 
     //append to DOM
     const trips = document.getElementById('trips');

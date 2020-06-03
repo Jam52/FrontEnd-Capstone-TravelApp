@@ -28,7 +28,7 @@ document.getElementById('popup-forms').addEventListener('click', (e) => {
 })
 
 //event listener for submit buttons
-document.getElementById('popup-forms').addEventListener('click', (e) => {
+document.getElementById('popup-forms').addEventListener('click', async (e) => {
     if(e.target && e.target.matches('.form-submit')) {
         e.preventDefault();
         const target = e.target;
@@ -44,9 +44,14 @@ document.getElementById('popup-forms').addEventListener('click', (e) => {
         const dataToPost = {'tripName': tripName, 'name': inputName, 'data': inputData};
         console.log('__data to post__');
         console.log(dataToPost);
+        
+        const trip = document.getElementById(tripName);
+        const targetDiv = trip.querySelector('.' + inputName);
         postData('/addAdditionalData', dataToPost).then(
-            updateUiWithNewTripData(tripName, inputName)
+            updateUiWithNewTripData(tripName, inputName, targetDiv)
         )
+    
+        
         popUpForm.classList.add('hidden-form');
     }
 })
@@ -82,14 +87,11 @@ function findTripNameForm(target) {
 }
 
 //getData and update UI
-async function updateUiWithNewTripData (tripName, inputName) {
+async function updateUiWithNewTripData(tripName, inputName, targetDiv) {
     console.log('__adding new data to UI__');
-    //get data from server
-    const dataFromServer = await getData('/tripData');
-    const newData = await dataFromServer[tripName][inputName]
-    //get trip and targetDiv from the dom
-    const trip = document.getElementById(tripName);
-    const targetDiv = trip.querySelector('.' + inputName);
+    //get data
+    const data = await getData('./tripData');
+    const newTripData = await data[tripName][inputName];
     //remove class 'hidden' to display in the dom
     targetDiv.classList.remove('hidden');
     //querry paragraph to update
@@ -97,7 +99,7 @@ async function updateUiWithNewTripData (tripName, inputName) {
 
     //Turn data into required HTMLtext format
     let formatedData = '';
-    for(const [key, value] of Object.entries( await newData)){
+    for(const [key, value] of Object.entries(newTripData)){
         if(key != 'notes') {
             const keyWithSpaces = key.replace('-', ' ');
             formatedData += `${keyWithSpaces}: ${value} <br>`;
@@ -105,7 +107,11 @@ async function updateUiWithNewTripData (tripName, inputName) {
             formatedData += `${value} <br>`;
         }
         
-        
     }
-    p.innerHTML  = await formatedData;
+    console.log(formatedData);
+    p.innerHTML  = formatedData;
+}
+
+export {
+    updateUiWithNewTripData
 }
