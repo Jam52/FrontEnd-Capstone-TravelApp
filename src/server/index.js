@@ -61,6 +61,7 @@ app.post('/newtrip', async (req, res) => {
     }
 })
 
+//post request to add new packing item
 app.post('/newPackingItem', (req, res) => {
     const request = req.body;
     const item = request.item;
@@ -69,6 +70,8 @@ app.post('/newPackingItem', (req, res) => {
     console.log(data[trip]);
 })
 
+
+//delete request to remove packing item
 app.delete('/removePackingItem/:tripName/:item', (req, res) => {
     const itemToRemove = req.params.item;
     console.log(itemToRemove);
@@ -83,6 +86,7 @@ app.delete('/removePackingItem/:tripName/:item', (req, res) => {
     console.log(data[trip]);
 })
 
+//post request to add additional trip data
 app.post('/addAdditionalData', (req, res) => {
     try{
         const request = req.body;
@@ -100,4 +104,11 @@ app.post('/addAdditionalData', (req, res) => {
         res.status(500);
     }
 
+})
+
+//delete request to remove intire trip
+app.delete('/deleteTrip/:tripName', (req, res) => {
+    const tripName = req.params.tripName;
+    delete data[tripName];
+    console.log(data);
 })

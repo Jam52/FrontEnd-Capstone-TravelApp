@@ -1,6 +1,8 @@
 const { findTripName } = require('./packingList');
 const { postData } = require('./serverRequests');
 const { getData } = require('./serverRequests');
+const { deleteTrip } = require('./serverRequests');
+
 
 //event listener for new trip info buttons
 document.getElementById('trips').addEventListener('click', (e) => {
@@ -46,6 +48,26 @@ document.getElementById('popup-forms').addEventListener('click', (e) => {
             updateUiWithNewTripData(tripName, inputName)
         )
         popUpForm.classList.add('hidden-form');
+    }
+})
+
+
+//event listener for delete trip popup form
+document.getElementById('popup-forms').addEventListener('click', (e) => {
+    if(e.target && e.target.matches('.form-delete')) {
+        e.preventDefault();
+        const target = e.target;
+        //find tripName
+        const tripName = findTripNameForm(target);
+        //delete trip from server
+        deleteTrip('/deleteTrip', tripName);
+        //remove trip from ui
+        document.getElementById(tripName).remove();
+         //hide popup form
+         const popUpForm = document.querySelector('.'+ target.name + "-popup-form");
+         popUpForm.classList.add('hidden-form');
+        
+        
     }
 })
 

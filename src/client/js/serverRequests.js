@@ -36,8 +36,17 @@ async function deleteData(url, tripName, item) {
     return await response.json();
   }
 
+  //DELETE trip request
+async function deleteTrip(url, tripName,) {
+    const response = await fetch(url + '/' + tripName, {
+        method: 'delete'
+    });
+    return await response.json();
+  }
+
 export {
     getData,
     postData,
-    deleteData
+    deleteData,
+    deleteTrip
 }

@@ -29,6 +29,44 @@ function addPackingItem(packingItem, packingListDiv) {
     }
 }
 
+
+//event listener for adding packing list items
+document.getElementById('trips').addEventListener('click', function(e) {
+    if(e.target && e.target.matches('.packing-submit')) {
+        e.preventDefault();
+        const target = e.target;
+        const packingItem = target.previousElementSibling.value;
+        const packingListDiv = target.parentNode.nextElementSibling;
+        addPackingItem(packingItem, packingListDiv);
+
+        //adding item to server data
+        const tripName = findTripName(target);
+        const itemObj = {"trip": tripName, "item": packingItem};
+        postData('/newPackingItem', itemObj);
+        
+    }
+});
+
+//event listener for removing packing list items
+document.getElementById('trips').addEventListener('click', function(e) {
+    if(e.target && e.target.matches('.remove-item')) {
+        e.preventDefault();
+        const target = e.target;
+
+        //removing item from server
+        console.log('__Removing Item__')
+        const tripName = findTripName(target);
+        console.log(tripName);
+        const packingItem = target.parentNode.previousElementSibling.textContent;
+        console.log(packingItem);
+        deleteData('/removePackingItem', tripName, packingItem);
+
+        //remove item from dom
+        target.parentNode.parentNode.remove();
+    }
+})
+
+
 function findTripName(target) {
     for( ; target && target !== document; target = target.parentNode) {
         if(target.matches('.trip')){

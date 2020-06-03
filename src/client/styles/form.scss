@@ -60,6 +60,10 @@ form div input {
         grid-template-columns: 1fr 1fr;
         grid-gap: 10px;
 
+        #delete {
+            grid-column: 1/-1 ;
+        }
+
     }
 
     button {
