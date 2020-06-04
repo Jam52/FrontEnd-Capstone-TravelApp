@@ -23,6 +23,7 @@ import './styles/base.scss';
 import './styles/header.scss';
 import './styles/form.scss';
 import './styles/trip.scss';
+import './styles/footer.scss';
 
 // adjust button size to match form input
 const finalSize = document.getElementById('destination-input').offsetHeight;

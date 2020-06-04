@@ -41,7 +41,7 @@ async function addNewTripToUi(tripName) {
         })
     }
 
-    //update flights data
+    //update additional trip data
     if('flights' in tripData){
         const targetDiv = newTripFragment.querySelector('.flights');
         updateUiWithNewTripData(tripName, 'flights', targetDiv);
@@ -56,8 +56,6 @@ async function addNewTripToUi(tripName) {
         const targetDiv = newTripFragment.querySelector('.notes');
         updateUiWithNewTripData(tripName, 'notes', targetDiv);
     }
-
-    
 
     //append to DOM
     const trips = document.getElementById('trips');

@@ -1,0 +1,33 @@
+@import 'base';
+
+
+footer {
+    height: 100px;
+    background: linear-gradient(150deg, $color-dark-grey 0%, $color-dark-blue 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    div {
+        width: 80%;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-left: 25px;
+        padding-right: 25px;
+        color: #fff;
+        
+        a {
+            text-decoration: none; 
+            color: #fff;
+        }
+    }
+}
+
+//Media querys for tablet size
+@media (max-width: $media-break-point-tablet) {
+    .footer {
+        display: none;
+    }
+}
