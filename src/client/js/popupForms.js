@@ -4,77 +4,51 @@ const { getData } = require('./serverRequests');
 const { deleteTrip } = require('./serverRequests');
 
 
-//event listener for new trip info buttons
-document.getElementById('trips').addEventListener('click', (e) => {
-    if(e.target && e.target.matches('.new-trip-info')) {
-        e.preventDefault();
-        const target = e.target;
-        const tripName = findTripName(target);
-        const popUpForm = document.querySelector('.'+ target.name + "-popup-form");
-        popUpForm.classList.remove('hidden-form');
-        popUpForm.setAttribute('id', tripName);
-    }
-})
+// function to show popup forms
+function showPopupForms(target) {
+    const tripName = findTripName(target);
+    const popUpForm = document.querySelector('.'+ target.name + "-popup-form");
+    popUpForm.classList.remove('hidden-form');
+    popUpForm.setAttribute('id', tripName);
+}
 
 
-//event listener for cancel buttons
-document.getElementById('popup-forms').addEventListener('click', (e) => {
-    if(e.target && e.target.matches('.form-cancel')) {
-        e.preventDefault();
-        const target = e.target;
-        const popUpForm = document.querySelector('.'+ target.name + "-popup-form");
-        popUpForm.classList.add('hidden-form');
-    }
-})
-
-//event listener for submit buttons
-document.getElementById('popup-forms').addEventListener('click', async (e) => {
-    if(e.target && e.target.matches('.form-submit')) {
-        e.preventDefault();
-        const target = e.target;
-        console.log('__submit ' + target.name + " form__");
-        const popUpForm = document.querySelector('.'+ target.name + "-popup-form");
-        const inputArray = popUpForm.querySelectorAll('input');
-        const inputData = {};
-        inputArray.forEach(element => {
-            inputData[element.name] = element.value;
-        })
-        const inputName = e.target.name;
-        const tripName = findTripNameForm(target);
-        const dataToPost = {'tripName': tripName, 'name': inputName, 'data': inputData};
-        console.log('__data to post__');
-        console.log(dataToPost);
+//popup form submit button function
+function popupFormSubmit(target) {
+    console.log('__submit ' + target.name + " form__");
+    const popUpForm = document.querySelector('.'+ target.name + "-popup-form");
+    const inputArray = popUpForm.querySelectorAll('input');
+    const inputData = {};
+    inputArray.forEach(element => {
+        inputData[element.name] = element.value;
+    })
+    const inputName = target.name;
+    const tripName = findTripNameForm(target);
+    const dataToPost = {'tripName': tripName, 'name': inputName, 'data': inputData};
+    console.log('__data to post__');
+    console.log(dataToPost);
         
-        const trip = document.getElementById(tripName);
-        const targetDiv = trip.querySelector('.' + inputName);
-        postData('/addAdditionalData', dataToPost).then(
-            updateUiWithNewTripData(tripName, inputName, targetDiv)
-        )
-    
-        
-        popUpForm.classList.add('hidden-form');
-    }
-})
+    const trip = document.getElementById(tripName);
+    const targetDiv = trip.querySelector('.' + inputName);
+    postData('/addAdditionalData', dataToPost).then(
+        updateUiWithNewTripData(tripName, inputName, targetDiv)
+    )
+    popUpForm.classList.add('hidden-form');
+}
 
 
-//event listener for delete trip popup form
-document.getElementById('popup-forms').addEventListener('click', (e) => {
-    if(e.target && e.target.matches('.form-delete')) {
-        e.preventDefault();
-        const target = e.target;
-        //find tripName
-        const tripName = findTripNameForm(target);
-        //delete trip from server
-        deleteTrip('/deleteTrip', tripName);
-        //remove trip from ui
-        document.getElementById(tripName).remove();
-         //hide popup form
-         const popUpForm = document.querySelector('.'+ target.name + "-popup-form");
-         popUpForm.classList.add('hidden-form');
-        
-        
-    }
-})
+//delete trip from server and DOM
+function removeTrip(target) {
+    //find tripName
+    const tripName = findTripNameForm(target);
+    //delete trip from server
+    deleteTrip('/deleteTrip', tripName);
+    //remove trip from ui
+    document.getElementById(tripName).remove();
+     //hide popup form
+     const popUpForm = document.querySelector('.'+ target.name + "-popup-form");
+     popUpForm.classList.add('hidden-form');
+}
 
 
 //find trip name from form target
@@ -113,5 +87,8 @@ async function updateUiWithNewTripData(tripName, inputName, targetDiv) {
 }
 
 export {
-    updateUiWithNewTripData
+    updateUiWithNewTripData,
+    removeTrip,
+    popupFormSubmit,
+    showPopupForms
 }

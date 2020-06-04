@@ -4,8 +4,9 @@ import { async } from 'regenerator-runtime';
 import arrow  from '../images/travelApp_arrow.png';
 const { addPackingItem } = require('./packingList')
 const { updateUiWithNewTripData } = require('./popupForms');
+const { calulateTripDaysAway } = require('./calculateDays');
 
-//addtrip to the DOM
+//add new trip to the DOM
 async function addNewTripToUi(tripName) {
     //get trip data
     const allTripData = await getData('/tripData');
@@ -41,7 +42,7 @@ async function addNewTripToUi(tripName) {
         })
     }
 
-    //update additional trip data
+    //update additional data
     if('flights' in tripData){
         const targetDiv = newTripFragment.querySelector('.flights');
         updateUiWithNewTripData(tripName, 'flights', targetDiv);
@@ -64,15 +65,6 @@ async function addNewTripToUi(tripName) {
 }
 
 
-//calculate days away
-function calulateTripDaysAway(departureDate) {
-    const now = new Date();
-    const formatDate = departureDate[3] + departureDate[4] + '/' + departureDate[0] + departureDate[1] + '/' + departureDate.slice(6);
-    const tripDate = new Date(formatDate);
-    const calculateDays = tripDate.getTime() - now.getTime();
-    const difference = calculateDays / (1000 * 3600 * 24);
-    return Math.ceil(difference);
-}
 
 export {
     addNewTripToUi,

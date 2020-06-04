@@ -1,12 +1,12 @@
 //imports
 const { dateChecker } = require('./validateDate.js');
-const { fetchGeonames } = require('./geonames.js');
+const { fetchGeonames } = require('./fetchGeonames.js');
 const { getWeatherBit } = require('./weatherbit.js');
 const { fetchPixabay } = require('./fetchPixabay');
 const { addNewTripToUi } = require('./updateUi');
 const { getData } = require('./serverRequests');
 const { postData } = require('./serverRequests');
-import { async } from 'regenerator-runtime';
+const { async } = require('regenerator-runtime');
 
 // create new trip fragment
 async function createNewTrip() {

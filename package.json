@@ -5,12 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --detectOpenHandles",
-    "start": "node src/server/index.js",
+    "start": "node src/server/start.js",
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --inline --progress --port 8001 --config webpack.dev.js --open"
   },
   "author": "",
   "license": "ISC",
+  "jest": {
+    "moduleNameMapper": {
+         "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+         "\\.(css|less)$": "./mocks/fileMock.js"
+       }
+   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "clean-webpack-plugin": "^3.0.0",
@@ -29,6 +35,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.10.1",
     "babel-loader": "^8.1.0",
     "babel-polyfill": "^6.26.0",
@@ -36,6 +43,7 @@
     "jest": "^26.0.1",
     "lodash": "^4.17.15",
     "puppeteer": "^3.2.0",
+    "supertest": "^4.0.2",
     "webpack": "^4.43.0",
     "webpack-dev-server": "^3.11.0"
   }

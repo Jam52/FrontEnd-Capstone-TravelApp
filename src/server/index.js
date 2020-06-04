@@ -30,12 +30,9 @@ app.get('/tripData', function (req, res) {
     res.send(data);
 })
 
-// designate PORT
-app.listen(8080, function () {
-    console.log('listening on port 8080');
-})
+// export app for supertest and start.js
+module.exports = app;
 
-//weatherbit fetch
 
 //POST trip data to server
 app.post('/newtrip', async (req, res) => {
@@ -67,7 +64,7 @@ app.post('/newPackingItem', (req, res) => {
     const item = request.item;
     const trip = request.trip;
     data[trip].packingList.push(item);
-    console.log(data[trip]);
+
 })
 
 
