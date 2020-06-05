@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = {
@@ -54,6 +56,12 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
+        new MiniCssExtractPlugin ({filename:'[name].styles.css'}),
+        new WorkboxWebpackPlugin.GenerateSW({
+            swDest: 'service-worker.js',
+            clientsClaim: true,
+            skipWaiting: true,
+        })
     ],
     output: {
         filename: '[name].bundle.js',

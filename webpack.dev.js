@@ -55,6 +55,11 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: './src/client/views/index.html'
+        }),
+        new WorkboxWebpackPlugin.GenerateSW({
+            swDest: 'service-worker.js',
+            clientsClaim: true,
+            skipWaiting: true,
         })
     ],
     output: {
