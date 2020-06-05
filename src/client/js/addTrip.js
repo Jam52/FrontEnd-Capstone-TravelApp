@@ -7,6 +7,7 @@ const { addNewTripToUi } = require('./updateUi');
 const { getData } = require('./serverRequests');
 const { postData } = require('./serverRequests');
 const { async } = require('regenerator-runtime');
+const { formatDate } = require('./calculateDays');
 
 // create new trip fragment
 async function createNewTrip() {
@@ -44,15 +45,41 @@ async function getTripDatesAndDestination () {
         alert('Invalid Return Date!')
     } else if(longAndLat == null) {
         alert('Invalid Desination!')
-    } else if((destination+departureDate.replace(/\//g, "-")) in existingTripCheck){
-        alert('Trip Already Exists!')
+    } else if(await checkOverlappingDates(departureDate, returnDate) === true){
+        alert('A trip already exists during these dates!')
     } else {
+        alert('Trip Added!!')
         result.departureDate = departureDate.replace(/\//g, "-");
         result.returnDate = returnDate.replace(/\//g, "-");
         result.destination = destination;
         result.lng = longAndLat.lng;
         result.lat = longAndLat.lat;
         return result;
+    }
+}
+
+//check data for trip with overlapping dates
+async function checkOverlappingDates(departureDate, returnDate) {
+    const tripData = await getData('/tripData');
+    const tripDataAsString = JSON.stringify(await tripData);
+    console.log(tripDataAsString);
+    //check to see if tripData is empty
+    if(tripDataAsString == '{}'){
+        return false;
+    }
+    const departureTime = new Date(formatDate(departureDate)).getTime();
+    const returnTime = new Date(formatDate(returnDate)).getTime();
+    for(const trip in await tripData) {
+        const existingReturnTime = new Date(formatDate(await tripData[trip].returnDate)).getTime();
+        const existingDepartureTime = new Date(formatDate(await tripData[trip].departureDate)).getTime();
+        if(departureTime <= existingReturnTime && returnTime >= existingDepartureTime) {
+            return true;
+        } else if (departureTime <= existingReturnTime && returnTime >= existingDepartureTime) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }
 
@@ -76,5 +103,6 @@ async function geonamesSearch(location){
 export {
     createNewTrip,
     getTripDatesAndDestination,
-    geonamesSearch
+    geonamesSearch,
+    checkOverlappingDates
 }
