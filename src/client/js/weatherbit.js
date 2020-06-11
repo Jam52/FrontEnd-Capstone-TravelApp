@@ -9,8 +9,8 @@ async function getWeatherBit(userInput, key) {
     const lat = userInput.lat;
     const departureDate = userInput.departureDate; 
     const returnDate = userInput.returnDate;
-    const startDate = departureDate[3]+departureDate[4]+'-'+departureDate[0]+departureDate[1];
-    const endDate = returnDate[3]+returnDate[4]+'-'+returnDate[0]+returnDate[1];
+    const startDate = departureDate.slice(5);
+    const endDate = returnDate.slice(5);
     try {
         const response = await fetchWeatherData(lat, lng, startDate, endDate, key);
         return await response.data[0];

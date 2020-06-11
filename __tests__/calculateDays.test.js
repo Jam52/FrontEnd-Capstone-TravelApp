@@ -10,7 +10,7 @@ test('test for calculate days away from current date ', () => {
     if(month.length == 1) {
         month = '0' + month;
     }
-    const inOneYear = day + '/' + month + '/' + (now.getFullYear()+1).toString();
+    const inOneYear = (now.getFullYear()+1).toString() + '/' + month + '/' + day;
     console.log(inOneYear);
     expect(calulateTripDaysAway(inOneYear)).toBe(365);
 })

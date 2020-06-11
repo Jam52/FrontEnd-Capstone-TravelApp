@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 
 module.exports = {
@@ -55,11 +56,6 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: './src/client/views/index.html'
-        }),
-        new WorkboxWebpackPlugin.GenerateSW({
-            swDest: 'service-worker.js',
-            clientsClaim: true,
-            skipWaiting: true,
         })
     ],
     output: {

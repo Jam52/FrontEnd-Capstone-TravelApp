@@ -1,15 +1,11 @@
 const { dateChecker } = require('../src/client/js/validateDate.js');
 
-test('checking date format', () => {
-    expect(dateChecker('05/12/2021')).toBeTruthy();
-    expect(dateChecker('05-12-2021')).toBeTruthy();
-    expect(dateChecker('05.12.2021')).toBeTruthy();
+test('checking not past date', () => {
+    expect(dateChecker('2019/06/15')).toBeFalsy();
+
 })
 
-test('checking imposible dates', () => {
-    expect(dateChecker('13/22/2020')).toBeFalsy();
-    expect(dateChecker('13/12/1820')).toBeFalsy();
-    expect(dateChecker('34/12/2020')).toBeFalsy();
-    expect(dateChecker('31/04/2020')).toBeFalsy();
-    expect(dateChecker('29/02/2020')).toBeFalsy();
+test('checking is future date', () => {
+    expect(dateChecker('2021/06/15')).toBeTruthy();
+
 })

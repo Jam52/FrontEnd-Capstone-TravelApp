@@ -35,10 +35,10 @@ async function getTripDatesAndDestination () {
     const departureDate = document.getElementById('departure-input').value;
     const returnDate = document.getElementById('return-input').value;
     const destination = document.getElementById('destination-input').value;
+    console.log('departure: '+ departureDate);
+    console.log('return: '+ returnDate);
     //get lng and lat using destination from userInput
     const longAndLat = await geonamesSearch(destination);
-    //get existing trip data to check if trip already exists
-    const existingTripCheck = await getData('/tripData');
     if(!dateChecker(departureDate)) {
         alert('Invalid Departur Date');
     } else if(!dateChecker(returnDate)) {
@@ -49,11 +49,13 @@ async function getTripDatesAndDestination () {
         alert('A trip already exists during these dates!')
     } else {
         alert('Trip Added!!')
-        result.departureDate = departureDate.replace(/\//g, "-");
-        result.returnDate = returnDate.replace(/\//g, "-");
+        result.departureDate = departureDate;
+        result.returnDate = returnDate;
         result.destination = destination;
         result.lng = longAndLat.lng;
         result.lat = longAndLat.lat;
+        console.log('__finish getTrpAndDest__')
+        console.log(result);
         return result;
     }
 }
@@ -67,11 +69,11 @@ async function checkOverlappingDates(departureDate, returnDate) {
     if(tripDataAsString == '{}'){
         return false;
     }
-    const departureTime = new Date(formatDate(departureDate)).getTime();
-    const returnTime = new Date(formatDate(returnDate)).getTime();
+    const departureTime = new Date(departureDate).getTime();
+    const returnTime = new Date(returnDate).getTime();
     for(const trip in await tripData) {
-        const existingReturnTime = new Date(formatDate(await tripData[trip].returnDate)).getTime();
-        const existingDepartureTime = new Date(formatDate(await tripData[trip].departureDate)).getTime();
+        const existingReturnTime = new Date(await tripData[trip].returnDate).getTime();
+        const existingDepartureTime = new Date(await tripData[trip].departureDate).getTime();
         if(departureTime <= existingReturnTime && returnTime >= existingDepartureTime) {
             return true;
         } else if (departureTime <= existingReturnTime && returnTime >= existingDepartureTime) {
