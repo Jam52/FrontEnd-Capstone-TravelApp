@@ -61,6 +61,19 @@ app.get('/weatherbit/:lng/:lat/:startDate/:endDate', (req, res) => {
     });
 })
 
+
+//api pixabay call
+app.get('/pixabay/:destination', (req, res) => {
+    const key = '16824419-68f454e4a716b1c3b2a8d63f6';
+    const destination = req.params.destination;
+    axios.get(`https://pixabay.com/api/?key=${key}&q=${destination}&lang=en&category=travel&order=popular`)
+    .then( response => {
+        console.log('__getting pixabay data__');
+        console.log(response.data.hits[0]);
+        res.send(response.data.hits[0]);
+    })
+})
+
 // export app for supertest and start.js
 module.exports = app;
 
@@ -78,7 +91,6 @@ app.post('/newtrip', async (req, res) => {
             "minTemp": newTripData.minTemp,
             "windSpd": newTripData.windSpd,
             "precip": newTripData.precip,
-            "imgUrl": newTripData.imgUrl,
             "packingList": []
         };
         if(!(newTripName in data)) {
@@ -116,6 +128,8 @@ app.delete('/removePackingItem/:tripName/:item', (req, res) => {
 
 //post request to add additional trip data
 app.post('/addAdditionalData', (req, res) => {
+    console.log('__attempting to post new trip data__')
+    console.log(data);
     try{
         const request = req.body;
         const name = request.name;

@@ -2,6 +2,8 @@ const { getData } = require('./serverRequests');
 const { fetchHtmlAsText } = require('./fetchHtmlAsText.js');
 import { async } from 'regenerator-runtime';
 import arrow  from '../images/travelApp_arrow.png';
+import question from '../images/travelApp_question.png';
+import { postData } from './serverRequests';
 const { addPackingItem } = require('./packingList')
 const { updateUiWithNewTripData } = require('./popupForms');
 const { calulateTripDaysAway } = require('./calculateDays');
@@ -23,7 +25,7 @@ async function addNewTripToUi(tripName) {
     newTripFragment.appendChild(await newDiv);
 
     //update initial infomation
-    newTripFragment.querySelector('img').setAttribute('src', await tripData.imgUrl);
+    newTripFragment.querySelector('img').setAttribute('src', question);
     newTripFragment.querySelector('h3 span').textContent = await tripData.destination;
     newTripFragment.querySelector('.dates').textContent = await tripData.departureDate + " - " + await tripData.returnDate;
     newTripFragment.querySelector('.packing-arrow').setAttribute('src', arrow );
@@ -61,6 +63,27 @@ async function addNewTripToUi(tripName) {
     //append to DOM
     const trips = document.getElementById('trips');
     trips.appendChild(await newTripFragment);
+
+    //update image
+    const locationImg = document.getElementById(tripName);
+    console.log(locationImg);
+    if(!('imgUrl' in tripData)) {
+        console.log('__pixabay__');
+        const pixabay = await fetch(`/pixabay/${await tripData.destination}`);
+        const pixabayData = await pixabay.json();
+        console.log(await pixabayData);
+        const newData = {'name': 'imgUrl', 'tripName': tripName}
+        if('webformatURL' in await pixabayData){
+            const webformatUrl = await pixabayData.webformatURL;
+            locationImg.querySelector('img').setAttribute('src',  await webformatUrl);
+            newData['data'] = await webformatUrl;
+            console.log(await newData);
+            postData('/addAdditionalData', await newData);
+            
+        }
+    } else {
+        locationImg.querySelector('img').setAttribute('src', tripData.imgUrl);
+    }
 
 }
 
