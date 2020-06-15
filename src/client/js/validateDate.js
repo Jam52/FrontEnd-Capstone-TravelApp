@@ -1,8 +1,16 @@
-function dateChecker (date) {
+
+
+function dateChecker (departureDate, returnDate) {
     const nowDate = new Date().getTime();
-    const dateToCheck = new Date(date).getTime();
-    return (dateToCheck - nowDate) > 0 ? true : false;
+    const departureTime = new Date(departureDate).getTime();
+    const returnTime = new Date(returnDate).getTime();
+    if(departureTime < nowDate | returnTime < departureTime ) {
+        alert('Invalid Dates!')
+        return true;
+    } 
+    return false;
 }
+
 
 export  {
     dateChecker

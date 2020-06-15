@@ -1,6 +1,5 @@
 //imports
 const { dateChecker } = require('./validateDate.js');
-const { fetchGeonames } = require('./fetchGeonames.js');
 const { getWeatherBit } = require('./weatherbit.js');
 const { fetchPixabay } = require('./fetchPixabay');
 const { addNewTripToUi } = require('./updateUi');
@@ -14,7 +13,7 @@ async function createNewTrip() {
     //get data from DOM
     const data = await getTripDatesAndDestination();
     //add lng and lat using initial userInput data
-    const weather = await getWeatherBit(await data, '327a6c289fd04805a16fea72bbed7a9a');
+    const weather = await getWeatherBit(await data);
     data.maxTemp = await weather.max_temp;
     data.minTemp = await weather.min_temp;
     data.precip = await weather.precip;
@@ -38,32 +37,41 @@ async function getTripDatesAndDestination () {
     console.log('departure: '+ departureDate);
     console.log('return: '+ returnDate);
     //get lng and lat using destination from userInput
-    const longAndLat = await geonamesSearch(destination);
-    if(!dateChecker(departureDate)) {
-        alert('Invalid Departur Date');
-    } else if(!dateChecker(returnDate)) {
-        alert('Invalid Return Date!')
-    } else if(longAndLat == null) {
+    let longAndLatJson = ''
+    try {
+        const longAndLat = await fetch('/geonames/' + destination);
+        longAndLatJson = await longAndLat.json();
+        console.log(await longAndLatJson);
+    } catch(error) {
+        console.log(error);
+        longAndLatJson = null;
+    }
+    
+    if(dateChecker(departureDate, returnDate)) {
+        console.log('datechecker() was false');
+    } else if(await longAndLatJson == null) {
         alert('Invalid Desination!')
-    } else if(await checkOverlappingDates(departureDate, returnDate) === true){
-        alert('A trip already exists during these dates!')
+    } else if(await checkOverlappingDates(departureDate, returnDate)){
+        alert('A Trip Already Exists During These Dates!')
     } else {
         alert('Trip Added!!')
         result.departureDate = departureDate;
         result.returnDate = returnDate;
         result.destination = destination;
-        result.lng = longAndLat.lng;
-        result.lat = longAndLat.lat;
+        result.lng = await longAndLatJson.lng;
+        result.lat = await longAndLatJson.lat;
         console.log('__finish getTrpAndDest__')
         console.log(result);
-        return result;
+        return await result;
     }
 }
+
 
 //check data for trip with overlapping dates
 async function checkOverlappingDates(departureDate, returnDate) {
     const tripData = await getData('/tripData');
     const tripDataAsString = JSON.stringify(await tripData);
+    console.log('__checkingOverlappingDates');
     console.log(tripDataAsString);
     //check to see if tripData is empty
     if(tripDataAsString == '{}'){
@@ -85,26 +93,9 @@ async function checkOverlappingDates(departureDate, returnDate) {
     }
 }
 
-//geonames fetch function returning only required infomation
-async function geonamesSearch(location){
-    const data = {};
-    try {
-        const geonames = await fetchGeonames(location);
-        data.lng = await geonames.geonames[0].lng;
-        data.lat = await geonames.geonames[0].lat;
-        return data;
-    } catch(error) {
-        console.log(error)
-        console.log(data);
-        return null;
-    }
-
-}
-
 
 export {
     createNewTrip,
     getTripDatesAndDestination,
-    geonamesSearch,
     checkOverlappingDates
 }

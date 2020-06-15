@@ -8,6 +8,7 @@ const app = express();
 app.use(express.static('./dist'))
 
 // setting up middlewear and dependencies
+const axios = require('axios');
 const bParser = require('body-parser');
 const cors = require('cors');
 app.use(cors());
@@ -26,8 +27,38 @@ app.get('/trip', function (req, res) {
 })
 
 app.get('/tripData', function (req, res) {
-    console.log('__getting trip data__');
+    
     res.send(data);
+})
+
+//api geoname call
+app.get('/geonames/:cityname', function (req,res) {
+    const city = req.params.cityname;
+    axios.get(`http://api.geonames.org/searchJSON?q=${city}&maxRows=1&username=Jam52`)
+    .then(response => {
+        console.log('__getting geoname data__');
+        console.log(response.data.geonames[0]);
+        res.send(response.data.geonames[0]);
+    })
+    .catch(error => {
+        console.log(error);
+        res.send({});
+    })
+})
+
+//api weaterbit call
+app.get('/weatherbit/:lng/:lat/:startDate/:endDate', (req, res) => {
+    const key = '327a6c289fd04805a16fea72bbed7a9a';
+    const lng = req.params.lng;
+    const lat = req.params.lat;
+    const startDate = req.params.startDate;
+    const endDate = req.params.endDate;
+    axios.get(`https://api.weatherbit.io/v2.0/normals?lat=${lat}&lon=${lng}&start_day=${startDate}&end_day=${endDate}&tp=daily&key=${key}`)
+    .then(response => {
+        console.log('__getting weatherbit data__');
+        console.log(response.data.data[0]);
+        res.send(response.data.data[0]);
+    });
 })
 
 // export app for supertest and start.js
