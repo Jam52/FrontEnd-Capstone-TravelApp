@@ -1,4 +1,8 @@
-const app = require('./index.js')
-app.listen(8080, function () {
+const app = require('./index.js');
+
+//setting port for heroku
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, function () {
     console.log('listening on port 8080');
 })
