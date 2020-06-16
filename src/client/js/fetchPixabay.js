@@ -4,7 +4,7 @@ import question from '../images/travelApp_question.png';
 
 async function fetchPixabay(destination) {
     try {
-        const response = await fetch(`https://pixabay.com/api/?key=${key}&q=${destination}&lang=en&category=travel&order=popular`);
+        const response = await fetch(`https://pixabay.com/api/?key=${key}&q=${destination}+city&lang=en&category=travel&order=popular`);
         const responseJson = await response.json();
         if('webformatURL' in await responseJson.hits[0] ){
             return await responseJson.hits[0].webformatURL;

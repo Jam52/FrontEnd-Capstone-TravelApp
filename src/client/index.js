@@ -24,6 +24,7 @@ const { showPopupForms } = require('./js/popupForms');
 
 
 //set images in webpack
+import overview from './images/travelApp_Overview.png'
 import Logo from './images/travelApp_logo.png';
 const logo = document.getElementById('logo');
 logo.setAttribute('src', Logo);
@@ -39,6 +40,9 @@ import './styles/footer.scss';
 // adjust button size to match form input
 const finalSize = document.getElementById('destination-input').offsetHeight;
 document.getElementById('new-trip-submit').style.height = finalSize + 'px';
+
+//add meta image for linkedin
+document.getElementById('meta').setAttribute('content', overview);
 
 //__EVENT LISTENERS__
 //event listener for new-trip-form
