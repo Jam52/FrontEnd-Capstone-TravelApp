@@ -7,6 +7,7 @@ const { getData } = require('./serverRequests');
 const { postData } = require('./serverRequests');
 const { async } = require('regenerator-runtime');
 const { formatDate } = require('./calculateDays');
+const { customAlert } = require('./alert');
 
 // create new trip fragment
 async function createNewTrip() {
@@ -50,11 +51,11 @@ async function getTripDatesAndDestination () {
     if(dateChecker(departureDate, returnDate)) {
         console.log('datechecker() was false');
     } else if(await longAndLatJson == null) {
-        alert('Invalid Desination!')
+        customAlert('Invalid Desination!')
     } else if(await checkOverlappingDates(departureDate, returnDate)){
-        alert('A Trip Already Exists During These Dates!')
+        customAlert('A Trip Already Exists During These Dates!')
     } else {
-        alert('Trip Added!!')
+        customAlert('Trip Added!!')
         result.departureDate = departureDate;
         result.returnDate = returnDate;
         result.destination = destination;

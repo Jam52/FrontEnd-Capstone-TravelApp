@@ -38,6 +38,7 @@ form div input {
 
 //pop up form elements
 .popup-form {
+    z-index: 2;
     position: fixed;
     margin: auto;
     background-color: rgba(0,0,0,0.2);
@@ -102,6 +103,10 @@ form div input {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
     }
+    .form-label {
+        font-size: 1.1em;
+        text-align: center;
+}
 }
 
 

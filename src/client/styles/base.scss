@@ -81,3 +81,12 @@ h1 h2 h3 {
 
 }
 
+
+//Media query for phone size
+@media (max-width: $media-break-point-phone) {
+    .main-content {
+        width: 90%;
+        margin: auto;
+    }
+    
+}
