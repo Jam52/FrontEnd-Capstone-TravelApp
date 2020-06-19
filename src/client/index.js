@@ -21,6 +21,7 @@ const { deletePackingItem } = require('./js/packingList');
 const { removeTrip } = require('./js/popupForms');
 const { popupFormSubmit } = require('./js/popupForms');
 const { showPopupForms } = require('./js/popupForms');
+const { findTripName } = require('./js/packingList');
 
 
 //set images in webpack
@@ -51,6 +52,17 @@ newTripSubmit.addEventListener('click', (event) => {
     event.preventDefault();
     createNewTrip();
 });
+
+//event listner for enter key on new trip
+const destinationInput = document.getElementById("destination-input");
+destinationInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+    event.preventDefault();
+    console.log('__enter key pressed__')
+    createNewTrip();
+  }
+});
+
 
 //event listener for adding packing list items
 document.getElementById('trips').addEventListener('click', function(e) {

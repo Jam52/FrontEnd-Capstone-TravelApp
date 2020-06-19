@@ -1,4 +1,5 @@
 import Cross from '../images/travelApp_cross.png';
+const { deleteData } = require('./serverRequests');
 
 function addPackingItem(packingItem, packingListDiv) {
     //create new fragment and add item
