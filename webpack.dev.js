@@ -48,14 +48,23 @@ module.exports = {
         }),
     ],
     plugins: [
-        new CleanWebpackPlugin({ 
-            dry: true,
-            cleanStaleWebpackAssets: true,
-            protectWebpackAssets: true,
-            verbose: true
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './src/client/views/index.html'
         }),
         new HtmlWebpackPlugin({
-            template: './src/client/views/index.html'
+            filename: 'trip.html',
+            template: './src/client/views/trip.html',
+            chunks: []
+        }),
+        new CleanWebpackPlugin({
+            // Simulate the removal of files
+            dry: true,
+            // Write Logs to Console
+            verbose: true,
+            // Automatically remove all unused webpack assets on rebuild
+            cleanStaleWebpackAssets: true,
+            protectWebpackAssets: false
         })
     ],
     output: {

@@ -15,10 +15,11 @@ async function createNewTrip() {
     const data = await getTripDatesAndDestination();
     //add lng and lat using initial userInput data
     const weather = await getWeatherBit(await data);
-    data.maxTemp = await weather.max_temp;
-    data.minTemp = await weather.min_temp;
+    data.temp = await weather.temp;
+    data.clouds = await weather.clouds;
     data.precip = await weather.precip;
     data.windSpd = await weather.wind_spd;
+    console.log('__Weather Data__', await data);
     //add img url to userInput data
     const imgUrl = await fetchPixabay(await data.destination);
     data.imgUrl = await imgUrl;

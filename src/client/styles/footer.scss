@@ -31,3 +31,12 @@ footer {
         display: none;
     }
 }
+
+@media (max-width: $media-break-point-phone) {
+    footer {
+        div {
+        flex-direction: column;
+        align-items: center;
+        }
+    }
+}

@@ -15,6 +15,12 @@ app.use(cors());
 app.use(bParser.urlencoded({extended: false}));
 app.use(bParser.json());
 
+//setting headers
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 // get Index entry point
 app.get('/', function (req,res) {
@@ -48,17 +54,32 @@ app.get('/geonames/:cityname', function (req,res) {
 
 //api weaterbit call
 app.get('/weatherbit/:lng/:lat/:startDate/:endDate', (req, res) => {
-    const key = '327a6c289fd04805a16fea72bbed7a9a';
-    const lng = req.params.lng;
-    const lat = req.params.lat;
+    console.log('__getting weatherbit data__')
+    const urlProxy = "https://cors-anywhere.herokuapp.com/";
+    const key = '6c288bb9da704042b4c51f3727bc2c1b';
+    const lng = Math.round((req.params.lng) * 10) /10;
+    const lat = Math.round((req.params.lat) * 10) /10;
     const startDate = req.params.startDate;
     const endDate = req.params.endDate;
-    axios.get(`https://api.weatherbit.io/v2.0/normals?lat=${lat}&lon=${lng}&start_day=${startDate}&end_day=${endDate}&tp=daily&key=${key}`)
-    .then(response => {
-        console.log('__getting weatherbit data__');
-        console.log(response.data.data[0]);
-        res.send(response.data.data[0]);
-    });
+    
+    const getWeather = async () => {
+            try {
+                return await axios.get(`https://api.weatherbit.io/v2.0/current?&lat=${lat}&lon=${lng}&key=${key}`)
+        } catch (error) {
+            console.log('ERROR CAUGHT');
+            console.log(error);
+            res.send(error);
+        }
+    }
+
+    const returnWeather = async () => {
+        const weather = await getWeather();
+        console.log(await weather.data.data[0])
+        res.send(await weather.data.data[0])
+    }
+
+    returnWeather();
+
 })
 
 
@@ -87,8 +108,8 @@ app.post('/newtrip', async (req, res) => {
             "departureDate": newTripData.departureDate,
             "returnDate": newTripData.returnDate,
             "destination": newTripData.destination,
-            "maxTemp": newTripData.maxTemp,
-            "minTemp": newTripData.minTemp,
+            "temp": newTripData.temp,
+            "clouds": newTripData.clouds,
             "windSpd": newTripData.windSpd,
             "precip": newTripData.precip,
             "packingList": []
