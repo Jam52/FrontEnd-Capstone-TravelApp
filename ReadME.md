@@ -76,7 +76,7 @@ Hosted on [heroku](https://www.heroku.com/)
 
 [View Site](https://infinite-lowlands-79665.herokuapp.com/)
 
-### Contact
+## Contact
 
 Jamie Sajdak - jamie.sajdak@gmail.com
 
