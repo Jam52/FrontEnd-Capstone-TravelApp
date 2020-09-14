@@ -15,9 +15,9 @@ Uses Node Express server to store and fetch data.
 - Webpack
 - Jest
 
-### Installation
+## Installation
 
-## Prerequisites
+### Prerequisites
 
 - npm
 
@@ -25,7 +25,7 @@ Uses Node Express server to store and fetch data.
 npm install npm@latest -g
 ```
 
-## APIs
+### APIs
 
 Get free API keys at:
 
@@ -33,7 +33,7 @@ Get free API keys at:
 2. [weatherbit](https://www.weatherbit.io/)
 3. [pixabay](pixabay)
 
-## Installation
+### Installation
 
 1. Get a free API Keys.
 2. Clone the repo
@@ -55,6 +55,20 @@ GEONAME='Your key here'
 WEATHERBIT='Your key here'
 PIXABAY='Your key here'
 ```
+
+5. Build project
+
+```sh
+npm run build
+```
+
+6. Run project
+
+```sh
+npm start
+```
+
+7. Open brower at http://localhost:5000/
 
 ### Hosting
 
